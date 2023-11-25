@@ -10,6 +10,7 @@ stopBtn.style.padding = '8px 20px';
 const div = document.querySelector('div');
 div.style.textAlign= 'center';
 
+let timerId = null;
 stopBtn.disabled = true;
 
 startBtn.addEventListener('click', () => {
