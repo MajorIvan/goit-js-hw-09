@@ -4,12 +4,11 @@ function getRandomHexColor() {
 
 const startBtn = document.querySelector('button[data-start]');
 const stopBtn = document.querySelector('button[data-stop]');
-
-const div = document.querySelector('div');
-div.style.textAlign= 'center';
 startBtn.style.padding = '8px 20px';
 stopBtn.style.padding = '8px 20px';
 
+const div = document.querySelector('div');
+div.style.textAlign= 'center';
 
 stopBtn.disabled = true;
 
