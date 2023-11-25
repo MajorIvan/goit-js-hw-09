@@ -13,7 +13,7 @@ div.style.textAlign= 'center';
 stopBtn.disabled = true;
 
 startBtn.addEventListener('click', () => {
-    const timerId = setInterval(() => {
+    timerId = setInterval(() => {
         document.body.style.backgroundColor = getRandomHexColor();
     }, 1000);
     startBtn.disabled = true;
