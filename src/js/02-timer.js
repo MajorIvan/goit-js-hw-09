@@ -13,6 +13,50 @@ const seconds = document.querySelector('[data-seconds]');
 let targetDate = null;
 let timerId = null;
 
+startBtn.addEventListener('click', () => {
+    timerId = setInterval(() => {
+        const res = targetDate - Date.now();
+        const { days, hours, minutes, seconds } = convertMs(res);
+        const formattedDays = addLeadingZero(days);
+        const formattedHours = addLeadingZero(hours);
+        const formattedMinutes = addLeadingZero(minutes);
+        const formattedSeconds = addLeadingZero(seconds);
+        days.textContent = formattedDays;
+        hours.textContent = formattedHours;
+        minutes.textContent = formattedMinutes;
+        seconds.textContent = formattedSeconds;
+        if (res <= 0) {
+            clearInterval(timerId);
+            Notiflix.Notify.success('Time is up!');
+            days.textContent = '00';
+            hours.textContent = '00';
+            minutes.textContent = '00';
+            seconds.textContent = '00';
+            startBtn.disabled = false;
+        }
+    
+    }, 1000);
+    startBtn.disabled = true;
+});
+
+const addLeadingZero = value => {
+    return value < 10 ? `0${value}` : value;
+};
+
+function convertMs(ms) {
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+
+    days = Math.floor(ms / day);
+    hours = Math.floor((ms % day) / hour);
+    minutes = Math.floor(((ms % day) % hour) / minute);
+    seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+    return { days, hours, minutes, seconds };
+}
+
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -30,51 +74,3 @@ const options = {
 };
 
 flatpickr(input, options);
-
-const addLeadingZero = value => {
-    return value < 10 ? `0${value}` : value;
-};
-
-
-function convertMs(ms) {
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
-
-    days = Math.floor(ms / day);
-    hours = Math.floor((ms % day) / hour);
-    minutes = Math.floor(((ms % day) % hour) / minute);
-    seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
-    return { days, hours, minutes, seconds };
-}
-
-const updateTimer = () => {
-    const res = targetDate - Date.now();
-    const { days, hours, minutes, seconds } = convertMs(res);
-    const formattedDays = addLeadingZero(days);
-    const formattedHours = addLeadingZero(hours);
-    const formattedMinutes = addLeadingZero(minutes);
-    const formattedSeconds = addLeadingZero(seconds);
-    timer.querySelector('[data-days]').textContent = formattedDays;
-    timer.querySelector('[data-hours]').textContent = formattedHours;
-    timer.querySelector('[data-minutes]').textContent = formattedMinutes;
-    timer.querySelector('[data-seconds]').textContent = formattedSeconds;
-    if (res <= 0) {
-        clearInterval(timerId);
-        Notiflix.Notify.success('Time is up!');
-        timer.querySelector('[data-days]').textContent = '00';
-        timer.querySelector('[data-hours]').textContent = '00';
-        timer.querySelector('[data-minutes]').textContent = '00';
-        timer.querySelector('[data-seconds]').textContent = '00';
-        startBtn.disabled = false;
-    }
-
-};
-
-startBtn.addEventListener('click', () => {
-    timerId = setInterval(updateTimer, 1000);
-    startBtn.disabled = true;
-
-});
