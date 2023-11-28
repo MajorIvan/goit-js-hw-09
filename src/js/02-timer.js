@@ -73,12 +73,3 @@ flatpickr(datePicker, {
 
 document.querySelector('.timer').style.display = 'flex';
 document.querySelector('.timer').style.gap = '10px';
-
-document.querySelectorAll('.field').style.display = 'flex';
-document.querySelectorAll('.field').style.flexDirection = 'column';
-document.querySelectorAll('.field').style.justifyItems = 'center';
-
-document.querySelectorAll('.value').style.justifyItems = 'center';
-document.querySelectorAll('.value').style.fontSize = '50px';
-
-document.querySelectorAll('.label').style.fontSize = '25px';
