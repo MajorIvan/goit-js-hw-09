@@ -15,7 +15,7 @@ let timerId = null;
 
 startBtn.addEventListener('click', () => {
     timerId = setInterval(() => {
-        const res = targetDate - Date.now();
+        const result = targetDate - Date.now();
         const { days, hours, minutes, seconds } = convertMs(res);
         const formattedDays = addLeadingZero(days);
         const formattedHours = addLeadingZero(hours);
@@ -25,7 +25,7 @@ startBtn.addEventListener('click', () => {
         timer.querySelector('[data-hours]').textContent = formattedHours;
         timer.querySelector('[data-minutes]').textContent = formattedMinutes;
         timer.querySelector('[data-seconds]').textContent = formattedSeconds;
-        if (res <= 0) {
+        if (result <= 0) {
             clearInterval(timerId);
             Notiflix.Notify.success('Time is up!');
             timer.querySelector('[data-days]').textContent = '00';
