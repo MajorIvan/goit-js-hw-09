@@ -33,6 +33,7 @@ startButton.addEventListener('click', () => {
         };
     }, 1000);
     startButton.disabled = true;
+    datePicker.disabled = true;
 });
 
 function addLeadingZero(value) {
