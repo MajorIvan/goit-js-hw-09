@@ -21,17 +21,17 @@ startBtn.addEventListener('click', () => {
         const formattedHours = addLeadingZero(hours);
         const formattedMinutes = addLeadingZero(minutes);
         const formattedSeconds = addLeadingZero(seconds);
-        timer.querySelector('[data-days]').textContent = formattedDays;
-        timer.querySelector('[data-hours]').textContent = formattedHours;
-        timer.querySelector('[data-minutes]').textContent = formattedMinutes;
-        timer.querySelector('[data-seconds]').textContent = formattedSeconds;
+        timer.days.textContent = formattedDays;
+        timer.hours.textContent = formattedHours;
+        timer.minutes.textContent = formattedMinutes;
+        timer.seconds.textContent = formattedSeconds;
         if (result <= 0) {
             clearInterval(timerId);
             Notiflix.Notify.success('Time is up!');
-            timer.querySelector('[data-days]').textContent = '00';
-            timer.querySelector('[data-hours]').textContent = '00';
-            timer.querySelector('[data-minutes]').textContent = '00';
-            timer.querySelector('[data-seconds]').textContent = '00';
+            timer.days.textContent = '00';
+            timer.hours.textContent = '00';
+            timer.minutes.textContent = '00';
+            timer.seconds.textContent = '00';
             startBtn.disabled = false;
         };
     }, 1000);
@@ -48,10 +48,10 @@ function convertMs(ms) {
     const hour = minute * 60;
     const day = hour * 24;
 
-    days = Math.floor(ms / day);
-    hours = Math.floor((ms % day) / hour);
-    minutes = Math.floor(((ms % day) % hour) / minute);
-    seconds = Math.floor((((ms % day) % hour) % minute) / second);
+    const days = Math.floor(ms / day);
+    const hours = Math.floor((ms % day) / hour);
+    const minutes = Math.floor(((ms % day) % hour) / minute);
+    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
     return { days, hours, minutes, seconds };
 }
