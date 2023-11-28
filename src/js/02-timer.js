@@ -9,6 +9,8 @@ const timer = document.querySelector('.timer');
 let targetDate = null;
 let timerId = null;
 
+startBtn.disabled = true;
+
 startBtn.addEventListener('click', () => {
     timerId = setInterval(() => {
         const result = targetDate - Date.now();
