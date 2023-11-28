@@ -23,6 +23,7 @@ startButton.addEventListener('click', () => {
             clearInterval(timerInterval);
             Notiflix.Notify.success('Time is up!');
             startButton.disabled = false;
+            datePicker.disabled = false;
         } else {
             const { days, hours, minutes, seconds } = convertMs(timeDiff);
             timerFields.days.textContent = addLeadingZero(days);
