@@ -2,34 +2,37 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from "notiflix";
 
-const input = document.querySelector('#datetime-picker');
-const startBtn = document.querySelector('button[data-start]');
-const timer = document.querySelector('.timer');
+const datePicker = document.querySelector('#datetime-picker');
+const startButton = document.querySelector('button[data-start]');
+const timerFields = {
+    days: document.querySelector('[data-days]'),
+    hours: document.querySelector('[data-hours]'),
+    minutes: document.querySelector('[data-minutes]'),
+    seconds: document.querySelector('[data-seconds]'),
+};
 
-let targetDate = null;
-let timerId = null;
+let timerInterval = null;
 
-startBtn.disabled = true;
+startButton.disabled = true;
 
-startBtn.addEventListener('click', () => {
-    timerId = setInterval(() => {
-        const result = targetDate - Date.now();
-        const { days, hours, minutes, seconds } = convertMs(result);
-        timer.querySelector('[data-days]').textContent = addLeadingZero(days);
-        timer.querySelector('[data-hours]').textContent = addLeadingZero(hours);
-        timer.querySelector('[data-minutes]').textContent = addLeadingZero(minutes);
-        timer.querySelector('[data-seconds]').textContent = addLeadingZero(seconds);
-        if (result <= 0) {
-            clearInterval(timerId);
+startButton.addEventListener('click', () => {
+    timerInterval  = setInterval(() => {
+        const selectedDate = new Date(datePicker.value).getTime();
+        const timeDiff = selectedDate - Date.now()
+        if (timeDiff  <= 0) {
+            clearInterval(timerInterval);
             Notiflix.Notify.success('Time is up!');
-            timer.querySelector('[data-days]').textContent = '00';
-            timer.querySelector('[data-hours]').textContent = '00';
-            timer.querySelector('[data-minutes]').textContent = '00';
-            timer.querySelector('[data-seconds]').textContent = '00';
-            startBtn.disabled = false;
+            startButton.disabled = false;
+        } else {
+            const { days, hours, minutes, seconds } = convertMs(timeDiff);
+            timerFields.days.textContent = addLeadingZero(days);
+            timerFields.hours.textContent = addLeadingZero(hours);
+            timerFields.minutes.textContent = addLeadingZero(minutes);
+            timerFields.seconds.textContent = addLeadingZero(seconds);
+            timeDiff -= 1000;
         };
     }, 1000);
-    startBtn.disabled = true;
+    startButton.disabled = true;
 });
 
 const addLeadingZero = value => {
@@ -50,21 +53,18 @@ function convertMs(ms) {
     return { days, hours, minutes, seconds };
 }
 
-const options = {
+flatpickr(datePicker, {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
     minuteIncrement: 1,
     onClose(selectedDates) {
-        const data = selectedDates[0];
-        if (data > Date.now()) {
-            targetDate = data;
-            startBtn.disabled = false;
+        const selectedDate = selectedDates[0];
+        if (selectedDate < Date.now()) {
+            Notiflix.Notify.warning('Please choose a date in the future')
+            startButton.disabled = true;
         } else {
-            Notiflix.Notify.failure('Please choose a date in the future')
-            startBtn.disabled = true;
+            startButton.disabled = false;
         }
     },
-};
-
-flatpickr(input, options);
+});
