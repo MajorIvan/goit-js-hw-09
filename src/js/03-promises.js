@@ -4,14 +4,14 @@ const form = document.querySelector('.form');
 
 form.addEventListener('submit', event => {
   event.preventDefault();
-  const { delay, step, amount } = event.currentTarget.elements;
-  let inputDelay = Number(delay.value);
-  let inputStep = Number(step.value);
-  let inputAmount = Number(amount.value);
 
-  for (let i = 1; i <= inputAmount; i += 1) {
-    let delays = inputDelay + inputDelay + i * inputStep;
-    createPromise(i, delays)
+  const delay = Number(form.elements.delay.value);
+  const step = Number(form.elements.step.value);
+  const amount = Number(form.elements.amount.value);
+
+  for (let i = 1; i <= amount; i ++) {
+    const request = delay + (i - 1) * step;
+    createPromise(i, request)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
@@ -22,8 +22,8 @@ form.addEventListener('submit', event => {
 });
 
 function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
     setTimeout(() => {
       if (shouldResolve) {
         resolve({ position, delay });
@@ -31,5 +31,5 @@ function createPromise(position, delay) {
         reject({ position, delay });
       }
     }, delay);
-  })
+  });
 };
