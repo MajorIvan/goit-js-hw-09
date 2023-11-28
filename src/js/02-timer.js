@@ -1,22 +1,13 @@
-// const date = new Date();
-// console.log(date);
-
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from "notiflix";
 
 const input = document.querySelector('#datetime-picker');
-
 const startBtn = document.querySelector('button[data-start]');
-
 const timer = document.querySelector('.timer');
-
 const days = document.querySelector('[data-days]');
-
 const hours = document.querySelector('[data-hours]');
-
 const minutes = document.querySelector('[data-minutes]');
-
 const seconds = document.querySelector('[data-seconds]');
 
 let targetDate = null;
@@ -51,11 +42,10 @@ function convertMs(ms) {
     const hour = minute * 60;
     const day = hour * 24;
 
-
-    const days = Math.floor(ms / day);
-    const hours = Math.floor((ms % day) / hour);
-    const minutes = Math.floor(((ms % day) % hour) / minute);
-    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+    days = Math.floor(ms / day);
+    hours = Math.floor((ms % day) / hour);
+    minutes = Math.floor(((ms % day) % hour) / minute);
+    seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
     return { days, hours, minutes, seconds };
 }
