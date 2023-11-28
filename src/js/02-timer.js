@@ -18,7 +18,7 @@ startButton.disabled = true;
 startButton.addEventListener('click', () => {
     timerInterval  = setInterval(() => {
         const selectedDate = new Date(datePicker.value).getTime();
-        const timeDiff = selectedDate - Date.now()
+        let timeDiff = selectedDate - Date.now()
         if (timeDiff  <= 0) {
             clearInterval(timerInterval);
             Notiflix.Notify.success('Time is up!');
@@ -29,6 +29,7 @@ startButton.addEventListener('click', () => {
             timerFields.hours.textContent = addLeadingZero(hours);
             timerFields.minutes.textContent = addLeadingZero(minutes);
             timerFields.seconds.textContent = addLeadingZero(seconds);
+            timeDiff -= 1000;
         };
     }, 1000);
     startButton.disabled = true;
