@@ -29,7 +29,6 @@ startButton.addEventListener('click', () => {
             timerFields.hours.textContent = addLeadingZero(hours);
             timerFields.minutes.textContent = addLeadingZero(minutes);
             timerFields.seconds.textContent = addLeadingZero(seconds);
-            timeDiff -= 1000;
         };
     }, 1000);
     startButton.disabled = true;
