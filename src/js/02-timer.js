@@ -33,10 +33,8 @@ startBtn.addEventListener('click', () => {
             timer.querySelector('[data-minutes]').textContent = '00';
             timer.querySelector('[data-seconds]').textContent = '00';
             startBtn.disabled = false;
-        }
-    
+        };
     }, 1000);
-    
     startBtn.disabled = true;
 });
 
