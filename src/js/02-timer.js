@@ -62,6 +62,7 @@ const options = {
             startBtn.disabled = false;
         } else {
             Notiflix.Notify.failure('Please choose a date in the future')
+            startBtn.disabled = true;
         }
     },
 };
