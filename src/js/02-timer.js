@@ -21,21 +21,22 @@ startBtn.addEventListener('click', () => {
         const formattedHours = addLeadingZero(hours);
         const formattedMinutes = addLeadingZero(minutes);
         const formattedSeconds = addLeadingZero(seconds);
-        days.textContent = formattedDays;
-        hours.textContent = formattedHours;
-        minutes.textContent = formattedMinutes;
-        seconds.textContent = formattedSeconds;
+        timer.querySelector('[data-days]').textContent = formattedDays;
+        timer.querySelector('[data-hours]').textContent = formattedHours;
+        timer.querySelector('[data-minutes]').textContent = formattedMinutes;
+        timer.querySelector('[data-seconds]').textContent = formattedSeconds;
         if (res <= 0) {
             clearInterval(timerId);
             Notiflix.Notify.success('Time is up!');
-            days.textContent = '00';
-            hours.textContent = '00';
-            minutes.textContent = '00';
-            seconds.textContent = '00';
+            timer.querySelector('[data-days]').textContent = '00';
+            timer.querySelector('[data-hours]').textContent = '00';
+            timer.querySelector('[data-minutes]').textContent = '00';
+            timer.querySelector('[data-seconds]').textContent = '00';
             startBtn.disabled = false;
         }
     
     }, 1000);
+    
     startBtn.disabled = true;
 });
 
