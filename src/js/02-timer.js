@@ -16,7 +16,7 @@ let timerId = null;
 startBtn.addEventListener('click', () => {
     timerId = setInterval(() => {
         const result = targetDate - Date.now();
-        const { days, hours, minutes, seconds } = convertMs(res);
+        const { days, hours, minutes, seconds } = convertMs(result);
         const formattedDays = addLeadingZero(days);
         const formattedHours = addLeadingZero(hours);
         const formattedMinutes = addLeadingZero(minutes);
