@@ -70,3 +70,9 @@ flatpickr(datePicker, {
         }
     },
 });
+
+document.querySelector('.timer').style.display = 'flex';
+document.querySelector('.timer').style.gap = '10px';
+
+document.querySelector('.field').style.display = 'grid';
+document.querySelector('.field').style.justifyItems = 'center';
