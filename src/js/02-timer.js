@@ -35,7 +35,7 @@ startButton.addEventListener('click', () => {
     startButton.disabled = true;
 });
 
-const addLeadingZero = value => {
+function addLeadingZero(value) {
     return value < 10 ? `0${value}` : value;
 };
 
