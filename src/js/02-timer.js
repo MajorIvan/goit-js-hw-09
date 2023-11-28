@@ -61,7 +61,7 @@ flatpickr(datePicker, {
     onClose(selectedDates) {
         const selectedDate = selectedDates[0];
         if (selectedDate < Date.now()) {
-            Notiflix.Notify.warning('Please choose a date in the future')
+            Notiflix.Notify.failure('Please choose a date in the future')
             startButton.disabled = true;
         } else {
             startButton.disabled = false;
